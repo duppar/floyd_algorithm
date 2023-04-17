@@ -1,3 +1,6 @@
+"""
+file to set up unittest for the set_self_edges function
+"""
 import sys
 import unittest
 
