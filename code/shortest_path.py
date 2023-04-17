@@ -9,7 +9,7 @@ INF = 99999
 def read_in_graph():
     for test_case in range(1):
         graph_test1 = Path(
-            "C:\\Users\\610109025\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\\sw developement\\Floyd\\floyd\\graph_inputs\\graph_test1.csv"
+            "C:\\Users\\610109025\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\\sw developement\\floyd_algorithm\\graph_inputs\\graph_test1.csv"
         )
         df = pd.read_csv(graph_test1.resolve(), sep=",")
         listlengths = df.values.tolist()
@@ -22,7 +22,7 @@ def create_list(nodes):
     return node_list
 
 
-def set_self_edge(nodes):
+def set_self_edge(nodes, input_graph):
     for m in range(nodes):
         for n in range(nodes):
             if m == n:
@@ -30,14 +30,14 @@ def set_self_edge(nodes):
     return input_graph
 
 
-def num_of_nodes():
+def num_of_nodes(listlengths):
     nodes = 0
     for i in range(len(listlengths)):
         nodes = max(nodes, listlengths[i][0], listlengths[i][1])
     return nodes
 
 
-def add_in_lengths(listlengths):
+def add_in_lengths(listlengths, input_graph):
     for i in range(len(listlengths)):
         source = listlengths[i][0]
         dest = listlengths[i][1]
@@ -99,17 +99,17 @@ input_graph = []
 
 
 listlengths = read_in_graph()
-nodes = num_of_nodes() + 1
+nodes = num_of_nodes(listlengths) + 1
 print("nodes", nodes)
 
 
 input_graph = create_list(nodes)
 
 # check this doesnt need a variable...??
-input_graph = set_self_edge(nodes)
+input_graph = set_self_edge(nodes, input_graph)
 
 print("o for self edges", input_graph)
-input_graph = add_in_lengths(listlengths)
+input_graph = add_in_lengths(listlengths, input_graph)
 print("after len", input_graph)
 
 
