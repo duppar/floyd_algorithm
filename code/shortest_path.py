@@ -1,49 +1,80 @@
-import pandas as pd
+"""python Program for Floyd Warshall Algorithm to find the shortest paths in a graph"""
 from pathlib import Path
+import pandas as pd
 
-# from floyd_recursion2 import find_shortest_path
-
+# Define infinity as the large value
+# so that a given path will never be chosen for route of the shortest path
 INF = 99999
 
 
 def read_in_graph():
-    for test_case in range(1):
-        graph_test1 = Path(
-            "C:\\Users\\610109025\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\\sw developement\\floyd_algorithm\\graph_inputs\\graph_test1.csv"
-        )
-        df = pd.read_csv(graph_test1.resolve(), sep=",")
-        listlengths = df.values.tolist()
-        print(listlengths)
-    return listlengths
+    """function to read in graphs from an excel file in the form of routes in to a dataframe
+    dataframe =
+        Source  destination  length
+    0       0            1       3
+    1       0            3       5
+    2       1            2       5
+    3       2            3       9
+
+    The dataframe is then converted to a list to be used to create
+      the input graph for the shortest path function.
+    listlengths =
+        [[0, 1, 3], [0, 3, 5], [1, 2, 5], [2, 3, 9]]
+    """
+    # path is initialised as the repository for input graphs
+    graph_test1 = Path(
+        "C:\\Users\\610109025\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\
+                \\sw developement\\floyd_algorithm\\graph_inputs\\graph_test1.csv"
+    )
+    dataframe = pd.read_csv(graph_test1.resolve(), sep=",")
+    listlength = dataframe.values.tolist()
+    print(listlength)
+    return listlength
 
 
-def create_list(nodes):
-    node_list = [[INF for i in range(nodes)] for i in range(nodes)]
+def create_list(node):
+    """
+    Function to create a graph for an inputted number of nodes all with infinite length
+    """
+    node_list = [[INF for i in range(node)] for i in range(node)]
     return node_list
 
 
-def set_self_edge(nodes, input_graph):
-    for m in range(nodes):
-        for n in range(nodes):
-            if m == n:
-                input_graph[m][n] = 0
-    return input_graph
+def set_self_edge(node_count, input_graphs):
+    """
+    Function to set to route for each node to itself as zero so it does not add to the shortest path
+    """
+    for source_node in range(node_count):
+        for destination_node in range(node_count):
+            if source_node == destination_node:
+                input_graphs[source_node][destination_node] = 0
+    return input_graphs
 
 
-def num_of_nodes(listlengths):
-    nodes = 0
-    for i in range(len(listlengths)):
-        nodes = max(nodes, listlengths[i][0], listlengths[i][1])
-    return nodes
+def num_of_nodes(listlength):
+    """
+    function to look at the list of routes defined in the input graph file
+    to calcualte the number of nodes in the graph
+    """
+    node = 0
+    routes_in_file = len(listlength)
+    for i in range(routes_in_file):
+        node = max(node, listlength[i][0], listlength[i][1])
+    return node
 
 
-def add_in_lengths(listlengths, input_graph):
-    for i in range(len(listlengths)):
-        source = listlengths[i][0]
-        dest = listlengths[i][1]
-        length = listlengths[i][2]
-        input_graph[source][dest] = length
-    return input_graph
+def add_in_lengths(listlength, input_graphs):
+    """ "
+    Function to add the defined route lengths from the input graph file
+    in to hte graph to be calculated in the shortest route function
+    """
+    routes_in_file = len(listlength)
+    for i in range(routes_in_file):
+        source = listlength[i][0]
+        dest = listlength[i][1]
+        length = listlength[i][2]
+        input_graphs[source][dest] = length
+    return input_graphs
 
 
 def find_shortest_path(
@@ -95,29 +126,20 @@ def find_shortest_path(
         return path_length
 
 
+# initialise input_graph as an empty list
 input_graph = []
-
-
+# read in the routes and lengths
 listlengths = read_in_graph()
+# pull back the number of nodes in teh graph
 nodes = num_of_nodes(listlengths) + 1
-print("nodes", nodes)
-
-
+# create a graph all with infinite lengths for the number
+# of nodes retrieved in the num_of_nodes function
 input_graph = create_list(nodes)
-
-# check this doesnt need a variable...??
+# set the routes between a node and itselve to zero
+# so no distance is added in the shortest path function
 input_graph = set_self_edge(nodes, input_graph)
-
-print("o for self edges", input_graph)
+# add in the possible routes and lengths from the listlengths added in
 input_graph = add_in_lengths(listlengths, input_graph)
-print("after len", input_graph)
-
-
-print(input_graph)
-
-print("nodes", nodes)
-number_of_nodes = len(input_graph)
-
-short_path = find_shortest_path(0, 0, 0, input_graph, number_of_nodes)
-
-print("shortest path", short_path)
+# calculate the shortest path between each pair of nodes
+shortest_path = find_shortest_path(0, 0, 0, input_graph, nodes)
+print(shortest_path)
