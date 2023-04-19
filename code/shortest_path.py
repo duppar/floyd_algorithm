@@ -24,7 +24,7 @@ def read_in_graph():
     # path is initialised as the repository for input graphs
     graph_test1 = Path(
         "C:\\Users\\610109025\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\
-                \\sw developement\\floyd_algorithm\\graph_inputs\\graph_test1.csv"
+                \\sw developement\\floyd_algorithm\\graph_inputs\\graph_test2.csv"
     )
     dataframe = pd.read_csv(graph_test1.resolve(), sep=",")
     listlength = dataframe.values.tolist()
