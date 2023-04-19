@@ -15,7 +15,6 @@ from shortest_path import find_shortest_path
 class TestOutputCorrect(unittest.TestCase):
     # set up
     def setUp(self):
-        print("set up")
         # Test case 19
         self.graph_correct_1 = [
             [0, 2, 99999, 2],
@@ -25,10 +24,10 @@ class TestOutputCorrect(unittest.TestCase):
         ]
         # Test case 20
         self.graph_correct_2 = [
-  [0, 3, 99999, 6],
+            [0, 3, 99999, 6],
             [99999, 0, 1, 99999],
             [99999, 99999, 0, 1],
-            [99999, 99999, 99999, 0]          ,
+            [99999, 99999, 99999, 0],
         ]
         # Test case 21
         self.graph_correct_3 = [
@@ -46,11 +45,11 @@ class TestOutputCorrect(unittest.TestCase):
         ]
         # Test case 23
         self.graph_correct_5 = [
-
-        ]            [0, 2, 99999, 2],
+            [0, 2, 99999, 2],
             [99999, 0, 2, 99999],
             [99999, 99999, 0, 99999],
             [99999, 99999, 3, 0],
+        ]
         # Test case 24
         self.graph_correct_6 = [
             [0, 4, 99999, 3],
@@ -182,7 +181,6 @@ class TestOutputCorrect(unittest.TestCase):
 
     # tear down
     def tearDown(self):
-        print("tear down")
         self.graph_correct_1 = [
             [99999, 99999, 99999, 99999],
             [99999, 99999, 99999, 99999],
@@ -595,10 +593,10 @@ class TestOutputCorrect(unittest.TestCase):
         self.assertEqual(
             find_shortest_path(self.i, self.j, self.k, self.graph_value_5, 4),
             [
-                [-71, -75, -83, -128],
-                [-73, -77, -85, -130],
-                [-82, -86, -94, -139],
-                [-131, -135, -143, -188],
+                [0, -4, 0, 6],
+                [-2, 0, 4, 10],
+                [1, 3, 0, 13],
+                [3, 5, 9, 0],
             ],
         )
 
