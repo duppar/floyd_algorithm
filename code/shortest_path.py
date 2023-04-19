@@ -24,7 +24,7 @@ def read_in_graph():
     # path is initialised as the repository for input graphs
     graph_test1 = Path(
         "C:\\Users\\610109025\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\
-                \\sw developement\\floyd_algorithm\\graph_inputs\\graph_test1.csv"
+                \\sw developement\\floyd_algorithm\\graph_inputs\\graph_test2.csv"
     )
     dataframe = pd.read_csv(graph_test1.resolve(), sep=",")
     listlength = dataframe.values.tolist()
@@ -94,28 +94,49 @@ def find_shortest_path(
         return path_length
 
     if destination_node == number_of_nodes - 1 and source_node == number_of_nodes - 1:
-        path_length[source_node][destination_node] = min(
-            path_length[source_node][destination_node],
-            path_length[source_node][interim_node]
-            + path_length[interim_node][destination_node],
-        )
+        if (
+            destination_node == interim_node
+            or source_node == interim_node
+            or source_node == destination_node
+        ):
+            pass
+        else:
+            path_length[source_node][destination_node] = min(
+                path_length[source_node][destination_node],
+                path_length[source_node][interim_node]
+                + path_length[interim_node][destination_node],
+            )
         find_shortest_path(0, 0, interim_node + 1, path_length, number_of_nodes)
 
     elif destination_node == number_of_nodes - 1:
-        path_length[source_node][destination_node] = min(
-            path_length[source_node][destination_node],
-            path_length[source_node][interim_node]
-            + path_length[interim_node][destination_node],
-        )
+        if (
+            destination_node == interim_node
+            or source_node == interim_node
+            or source_node == destination_node
+        ):
+            pass
+        else:
+            path_length[source_node][destination_node] = min(
+                path_length[source_node][destination_node],
+                path_length[source_node][interim_node]
+                + path_length[interim_node][destination_node],
+            )
         find_shortest_path(
             source_node + 1, 0, interim_node, path_length, number_of_nodes
         )
     else:
-        path_length[source_node][destination_node] = min(
-            path_length[source_node][destination_node],
-            path_length[source_node][interim_node]
-            + path_length[interim_node][destination_node],
-        )
+        if (
+            destination_node == interim_node
+            or source_node == interim_node
+            or source_node == destination_node
+        ):
+            pass
+        else:
+            path_length[source_node][destination_node] = min(
+                path_length[source_node][destination_node],
+                path_length[source_node][interim_node]
+                + path_length[interim_node][destination_node],
+            )
         find_shortest_path(
             source_node,
             destination_node + 1,
