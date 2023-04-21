@@ -13,7 +13,6 @@ class TestOutputCorrect(unittest.TestCase):
     """Class to test whether the output from the function is correct"""
 
     def setUp(self):
-        print("set up")
         self.listlengths1 = [[0, 1, 3], [0, 3, 5], [1, 2, 5], [2, 3, 9]]
         self.input_graph = [
             [0, 99999, 99999, 99999],
@@ -23,7 +22,13 @@ class TestOutputCorrect(unittest.TestCase):
         ]
 
     def tearDown(self):
-        print("tear down")
+        self.listlengths1 = [[0, 1, 3], [0, 3, 5], [1, 2, 5], [2, 3, 9]]
+        self.input_graph = [
+            [0, 99999, 99999, 99999],
+            [99999, 0, 99999, 99999],
+            [99999, 99999, 0, 99999],
+            [99999, 99999, 99999, 0],
+        ]
 
     def test_add_in_lengths(self):
         """test to see if the route lengths are added in correctly"""
