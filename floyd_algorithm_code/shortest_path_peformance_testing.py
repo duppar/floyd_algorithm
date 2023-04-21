@@ -1,5 +1,6 @@
 """ 
-file to set the Recusion and Iterative files to be the same to perform performance testing
+file to set the Recusion and Iterative files to be the same for performance testing
+
 All tests are listed and commented out for completeness 
 
 """

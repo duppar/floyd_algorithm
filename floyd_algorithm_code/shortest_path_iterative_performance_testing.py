@@ -1,5 +1,5 @@
 """ 
-file to set the Recusion and Iterative files to be the same to perform performance testing
+file to set the Recusion and Iterative files to be the same for performance testing
 All tests are listed and commented out for completeness 
 
 """
@@ -7,25 +7,25 @@ All tests are listed and commented out for completeness
 import timeit
 
 # import cProfile  # test 9
-# from shortest_path_iterative import floydWarshall  # test 7
+# from shortest_path_iterative import floydwarshall  # test 7
 # import datetime  # Test 1 normal Timer
 
 # starting_time = timeit.default_timer()  # Test 2 Default Timer
 # start_time = datetime.datetime.now()  # Test 1 normal Timer
 # Import the shortest path function
-mysetup = "from shortest_path_iterative import floydWarshall"
+mysetup = "from shortest_path_iterative import floydwarshall"
 
 # code snippet whose execution time is to be measured
 mycode = """
 # Import the shortest path function
-#from shortest_path_iterative import floydWarshall
+#from shortest_path_iterative import floydwarshall
 
 # set up the graph to use as a list
 INF = 99999
 #graph = [[0, 5, INF, 10], [INF, 0, 3, INF], [INF, INF, 0, 1], [INF, INF, INF, 0]]
 graph = [[0, 5, INF, 5], [INF, 0, 3, INF], [INF, INF, 0, 2], [INF, 3, INF, 0]]
 # calculate shorteat path
-shortest_path = floydWarshall(graph)
+shortest_path = floydwarshall(graph)
 #print(shortest_path)
 """
 # timeit & cProfile statement used to test the code

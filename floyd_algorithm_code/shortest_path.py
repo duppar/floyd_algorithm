@@ -7,9 +7,11 @@ import pandas as pd
 INF = 99999
 
 
-def read_in_graph():
-    """function to read in graphs from an excel file in the form of routes in to a dataframe
-    dataframe =
+def read_in_graph() -> int:
+    """function to read in graphs from an excel file
+    Graphs are defined as routes and translated in to a dataframe
+
+    example dataframe =
         Source  destination  length
     0       0            1       3
     1       0            3       5
@@ -18,7 +20,8 @@ def read_in_graph():
 
     The dataframe is then converted to a list to be used to create
       the input graph for the shortest path function.
-    listlengths =
+
+    example listlengths =
         [[0, 1, 3], [0, 3, 5], [1, 2, 5], [2, 3, 9]]
     """
     # path is initialised as the repository for input graphs
@@ -28,11 +31,11 @@ def read_in_graph():
     )
     dataframe = pd.read_csv(graph_test1.resolve(), sep=",")
     listlength = dataframe.values.tolist()
-    # print(listlength)
+    print(listlength)
     return listlength
 
 
-def create_list(node):
+def create_list(node: int) -> list:
     """
     Function to create a graph for an inputted number of nodes all with infinite length
     """
@@ -40,7 +43,7 @@ def create_list(node):
     return node_list
 
 
-def set_self_edge(node_count, input_graphs):
+def set_self_edge(node_count: int, input_graphs: list) -> list:
     """
     Function to set to route for each node to itself as zero so it does not add to the shortest path
     """
@@ -51,7 +54,7 @@ def set_self_edge(node_count, input_graphs):
     return input_graphs
 
 
-def num_of_nodes(listlength):
+def num_of_nodes(listlength: list) -> int:
     """
     function to look at the list of routes defined in the input graph file
     to calcualte the number of nodes in the graph
@@ -63,10 +66,10 @@ def num_of_nodes(listlength):
     return node
 
 
-def add_in_lengths(listlength, input_graphs):
+def add_in_lengths(listlength: list, input_graphs: list) -> list:
     """ "
     Function to add the defined route lengths from the input graph file
-    in to hte graph to be calculated in the shortest route function
+    in to the graph to be calculated in the shortest route function
     """
     routes_in_file = len(listlength)
     for i in range(routes_in_file):
@@ -78,15 +81,22 @@ def add_in_lengths(listlength, input_graphs):
 
 
 def find_shortest_path(
-    source_node, destination_node, interim_node, path_length, number_of_nodes
-):
+    source_node: int,
+    destination_node: int,
+    interim_node: int,
+    path_length: list,
+    number_of_nodes: int,
+) -> list:
     """function to take a graph and find the shortest path between each pair of nodes
-        input_graph = [[0, 10, INF, 30],
+
+        example input_graph = [[0, 10, INF, 30],
                   [INF, 0, 5, INF],
                   [INF, INF, 0,   7],
                   [INF, INF, INF, 0]
                   ]
-                  and returns
+
+
+         function returns
     [[0, 10, 15, 3], [99999, 0, 5, 12], [99999, 99999, 0, 7], [99999, 99999, 99999, 0]]
     """
 
@@ -94,28 +104,51 @@ def find_shortest_path(
         return path_length
 
     if destination_node == number_of_nodes - 1 and source_node == number_of_nodes - 1:
-        path_length[source_node][destination_node] = min(
-            path_length[source_node][destination_node],
-            path_length[source_node][interim_node]
-            + path_length[interim_node][destination_node],
-        )
+        if (
+            destination_node == interim_node
+            or source_node == interim_node
+            or source_node == destination_node
+        ):
+            pass
+        else:
+            path_length[source_node][destination_node] = min(
+                path_length[source_node][destination_node],
+                path_length[source_node][interim_node]
+                + path_length[interim_node][destination_node],
+            )
+        # check paths through the next vetex
         find_shortest_path(0, 0, interim_node + 1, path_length, number_of_nodes)
-
     elif destination_node == number_of_nodes - 1:
-        path_length[source_node][destination_node] = min(
-            path_length[source_node][destination_node],
-            path_length[source_node][interim_node]
-            + path_length[interim_node][destination_node],
-        )
+        if (
+            destination_node == interim_node
+            or source_node == interim_node
+            or source_node == destination_node
+        ):
+            pass
+        else:
+            path_length[source_node][destination_node] = min(
+                path_length[source_node][destination_node],
+                path_length[source_node][interim_node]
+                + path_length[interim_node][destination_node],
+            )
+        # check paths from next source node
         find_shortest_path(
             source_node + 1, 0, interim_node, path_length, number_of_nodes
         )
     else:
-        path_length[source_node][destination_node] = min(
-            path_length[source_node][destination_node],
-            path_length[source_node][interim_node]
-            + path_length[interim_node][destination_node],
-        )
+        if (
+            destination_node == interim_node
+            or source_node == interim_node
+            or source_node == destination_node
+        ):
+            pass
+        else:
+            path_length[source_node][destination_node] = min(
+                path_length[source_node][destination_node],
+                path_length[source_node][interim_node]
+                + path_length[interim_node][destination_node],
+            )
+            # check path from source node to the next destination node
         find_shortest_path(
             source_node,
             destination_node + 1,
@@ -142,4 +175,4 @@ input_graph = set_self_edge(nodes, input_graph)
 input_graph = add_in_lengths(listlengths, input_graph)
 # calculate the shortest path between each pair of nodes
 shortest_path = find_shortest_path(0, 0, 0, input_graph, nodes)
-# print(shortest_path)
+print(shortest_path)

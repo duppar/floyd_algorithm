@@ -12,7 +12,7 @@ INF = 99999
 # via Floyd Warshall Algorithm
 
 
-def floydWarshall(graph):
+def floydwarshall(graph):
     """dist[][] will be the output
     matrix that will finally
      have the shortest distances
@@ -57,7 +57,7 @@ def floydWarshall(graph):
 
 
 # A utility function to print the solution
-def printSolution(dist):
+def printsolution(dist):
     print(
         "Following matrix shows the shortest distances\
  between every pair of vertices"
@@ -85,5 +85,5 @@ if __name__ == "__main__":
                 3           """
     graph = [[0, 5, INF, 10], [INF, 0, 3, INF], [INF, INF, 0, 1], [INF, INF, INF, 0]]
     # Function call
-    floydWarshall(graph)
+    floydwarshall(graph)
 # This code is contributed by Mythri J L
