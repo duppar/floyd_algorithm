@@ -4,7 +4,7 @@ file to set up unittest for the add_in_lengths function
 import unittest
 import sys
 
-path1 = "C:\\Users\\610109025\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\\\sw developement\\floyd_algorithm\\code"
+path1 = "C:\\Users\\xxxxxxxx\\OneDrive - BT Plc\\Documents - RDM Admin\\General\\Post Grad\\\sw developement\\floyd_algorithm\\code"
 sys.path.append(path1)
 from shortest_path import add_in_lengths
 
