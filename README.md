@@ -47,7 +47,8 @@ path_length = [[0, 2, 1, 2],[99999, 0, 2, 3],[99999, 99999, 0, 1],[99999, 99999,
 
 
 # Authors
-•	Rachael Duppa-Miller
+Rachael Duppa-Miller                            
+The Iterative version used for performance testing is contributed by Mythri J L
 ________________________________________
 # MIT License
 
